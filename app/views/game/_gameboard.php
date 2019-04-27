@@ -29,7 +29,7 @@
             echo '<td style="background-color: rgb(0,0,0)"></td>';
         } else {
             echo '<td style="background-color: rgb(0,' . (200 - $data->Vegitation) . ',0)">';
-            if ($mid == false){
+            if ($mid == false) {
                 echo '<form action="'.URLROOT.'game/movement" method="post" autocomplete="off">';
                 echo '<input type="hidden" name="_token" value="'.Session::get('_token').'">';
                 echo '<input type="hidden" name="location" value="'.$data->ID.'">';
