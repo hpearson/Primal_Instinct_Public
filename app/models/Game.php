@@ -26,23 +26,23 @@ class Game_Model {
             DECLARE @X int 
             DECLARE @Y int
             SELECT @X = Grid_X, @Y = Grid_Y FROM GameBoard WHERE ID = :location
-            SELECT * FROM GameBoard WHERE @X = Grid_X - 1 AND @Y = Grid_Y - 1
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X - 1 AND @Y = Grid_Y - 1
             UNION
-            SELECT * FROM GameBoard WHERE @X = Grid_X AND @Y = Grid_Y - 1
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X AND @Y = Grid_Y - 1
             UNION
-            SELECT * FROM GameBoard WHERE @X = Grid_X + 1 AND @Y = Grid_Y - 1
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X + 1 AND @Y = Grid_Y - 1
             UNION
-            SELECT * FROM GameBoard WHERE @X = Grid_X - 1 AND @Y = Grid_Y
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X - 1 AND @Y = Grid_Y
             UNION
-            SELECT * FROM GameBoard WHERE @X = Grid_X AND @Y = Grid_Y
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X AND @Y = Grid_Y
             UNION
-            SELECT * FROM GameBoard WHERE @X = Grid_X + 1 AND @Y = Grid_Y
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X + 1 AND @Y = Grid_Y
             UNION
-            SELECT * FROM GameBoard WHERE @X = Grid_X - 1 AND @Y = Grid_Y + 1
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X - 1 AND @Y = Grid_Y + 1
             UNION
-            SELECT * FROM GameBoard WHERE @X = Grid_X AND @Y = Grid_Y + 1
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X AND @Y = Grid_Y + 1
             UNION
-            SELECT * FROM GameBoard WHERE @X = Grid_X + 1 AND @Y = Grid_Y + 1
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X + 1 AND @Y = Grid_Y + 1
             ORDER BY Grid_Y, Grid_X
         ");
         

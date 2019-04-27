@@ -38,7 +38,9 @@
                 echo '<input type="submit" value="Move" class="btn btn-success btn-block">';
                 echo '<input type="hidden" name="_token" value="'.Session::get('_token').'"></div>';
                 echo '</div>';
-                echo '</form>';   
+                echo '</form>';
+                echo '<br>';
+                echo 'Players: '.$data->Players;
             }
             echo '<br>';
             echo $data->Vegitation;
