@@ -13,7 +13,7 @@
     </tr>
     <tr>
         <?php DisplayMapSection($data[3]); ?>
-        <?php DisplayMapSection($data[4]); ?>
+        <?php DisplayMapSection($data[4], true); ?> 
         <?php DisplayMapSection($data[5]); ?>
     </tr>
     <tr>
@@ -24,20 +24,22 @@
 </table>
 
 <?php 
-    function DisplayMapSection($data){
+    function DisplayMapSection($data, $mid = false){
         if ($data->Grid_X == 100 || $data->Grid_X == 0 || $data->Grid_Y == 100 || $data->Grid_Y == 0){
             echo '<td style="background-color: rgb(0,0,0)"></td>';
         } else {
             echo '<td style="background-color: rgb(0,' . (200 - $data->Vegitation) . ',0)">';
-            echo '<form action="'.URLROOT.'game/movement" method="post" autocomplete="off">';
-            echo '<input type="hidden" name="_token" value="'.Session::get('_token').'">';
-            echo '<input type="hidden" name="location" value="'.$data->ID.'">';
-            echo '<div class="row">';
-            echo '<div class="col">';
-            echo '<input type="submit" value="Move" class="btn btn-success btn-block">';
-            echo '<input type="hidden" name="_token" value="'.Session::get('_token').'"></div>';
-            echo '</div>';
-            echo '</form>';   
+            if ($mid == false){
+                echo '<form action="'.URLROOT.'game/movement" method="post" autocomplete="off">';
+                echo '<input type="hidden" name="_token" value="'.Session::get('_token').'">';
+                echo '<input type="hidden" name="location" value="'.$data->ID.'">';
+                echo '<div class="row">';
+                echo '<div class="col">';
+                echo '<input type="submit" value="Move" class="btn btn-success btn-block">';
+                echo '<input type="hidden" name="_token" value="'.Session::get('_token').'"></div>';
+                echo '</div>';
+                echo '</form>';   
+            }
             echo '<br>';
             echo $data->Vegitation;
             echo '<br>';
