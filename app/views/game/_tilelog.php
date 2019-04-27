@@ -3,7 +3,7 @@
     <div class="row">
         <?php
         foreach ($data as $value) {
-            echo $value->EventTime;
+            echo get_timeago(strtotime($value->EventTime));
             echo ' | ';
             echo $value->EventDesc;
             echo '<br>';
