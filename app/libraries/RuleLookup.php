@@ -21,7 +21,8 @@ class RuleLookup {
     static function Email($input){
         $ValidateAgainst = v::allOf(
                 v::NotEmpty(),
-                v::Email()
+                v::Email(),
+                v::Length(3, 50)
         );
         $VWithName = $ValidateAgainst->setName(' ');
         return RuleLookup::RunTest($VWithName, $input);

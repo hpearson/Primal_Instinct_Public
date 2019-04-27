@@ -8,7 +8,6 @@ set_error_handler (
 );
 
 
-
 // Load in all the files we will need
 require_once './app/bootstrap.php';
 

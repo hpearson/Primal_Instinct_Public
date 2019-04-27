@@ -1,13 +1,25 @@
--<form autocomplete="off"
 -display-errors=OFF in php.ini
 
 
 
 
-hard error php array failure
--set the token on new session and check against it. (clean up)
+
+
 
 -on inputs htmlspecialchars( $input, ENT_QUOTES );
-
-
 check datatypes of all input
+
+
+
+
+
+
+9:10pm 04/26/2019
+Core Framework should be done
+Error reporting is fully completed 
+Next: User registration and login
+
+
+
+
+Fix

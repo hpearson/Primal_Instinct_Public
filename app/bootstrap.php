@@ -19,16 +19,12 @@ require_once 'helpers/session_helper.php';
 require_once 'helpers/url_helper.php';
 
 
-//$input = "Bad inpu't <b>asd</b>&#FFFD;";
-//$input = htmlspecialchars($input, ENT_QUOTES);
-
-
-
 //$password = 'secret';
 //$hash = password_hash($password, PASSWORD_BCRYPT, [12]);
-
+//echo $hash;
+//echo '<br>';
 //Will read the password crypt type and complexity to decode against a password
-//if (password_verify($password, $hash)) {
+//if (password_verify($password, $hash)) { TODO
 //    echo 'yes';
 //} else {
 //    echo 'No';

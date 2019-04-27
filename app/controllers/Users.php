@@ -1,9 +1,10 @@
 <?php
 
 class Users extends Controller {
+    private $SQL;
 
     public function __construct() {
-        //$this->userModel = $this->model('User');
+        $this->SQL = $this->model('Users');
     }
 
     public function register() {
@@ -37,8 +38,21 @@ class Users extends Controller {
         $data = $this->register_check_error($input);
         
         if ($data['HAS_ERRORS'] == false) {
+            // Encrypt the user password
+            $input['password'] = password_hash($input['password'], PASSWORD_BCRYPT, [12]);
+            
+            
+            $Var_Input = $input;
+            $this->SQL = $this->SQL->CreateUserAccount($Var_Input);
+            Inform::push_info('Your account has been created.');
+            redirect('users/login');
+            
+            
+            
+            
+            
             // Validated
-            die('SUCCESS');
+            //die('SUCCESS');
         } else {
             $HTMLsafe = Secure::HTML($data);
             $this->view('users/register', $HTMLsafe);
@@ -81,12 +95,16 @@ class Users extends Controller {
     
     private function register_check_error($data) {
         $data['username_err'] = RuleLookup::Username($data['username']);
-        // Check if there is not an error
-            // Check if the username already exists in the database
+        // Check if the username already exists in the database
+        if (!empty($this->SQL->UsernameExists($data))){
+            $data['username_err'] = 'Username is taken';
+        }
         
         $data['email_err'] = RuleLookup::Email($data['email']);
-        // Check if there is not an error
-            // Check if the email already exists in the database
+        // Check if the email already exists in the database TODO
+        if (!empty($this->SQL->EmailExists($data))){
+            $data['email_err'] = 'Email is already in use';
+        }
         
         $data['password_err'] = RuleLookup::Password($data['password']);
         
@@ -102,7 +120,6 @@ class Users extends Controller {
         ) {
             $data['HAS_ERRORS'] = false;
         }
-
         //Return to the controller
         return($data);
     }
@@ -121,7 +138,7 @@ class Users extends Controller {
             $data['HAS_ERRORS'] = false;
         }
 
-        //Return to the controller
+        // Return to the controller
         return($data);
     }
 
