@@ -79,6 +79,6 @@ class Game_Model {
     public function ReduceAP() {
         $this->db->query("UPDATE Player SET AP = AP - 1 WHERE ID = :player ");
         $this->db->bind('player', Session::get('PlayerGUID'));
-        return $this->db->single();
+        return $this->db->execute();
     }
 }
