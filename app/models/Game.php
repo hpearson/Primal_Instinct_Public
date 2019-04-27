@@ -70,5 +70,15 @@ class Game_Model {
         return $this->db->resultSet();
     }
     
+    public function GetAP() {
+        $this->db->query("SELECT AP FROM Player WHERE ID = :player ");
+        $this->db->bind('player', Session::get('PlayerGUID'));
+        return $this->db->single();
+    }    
     
+    public function ReduceAP() {
+        $this->db->query("UPDATE Player SET AP = AP - 1 WHERE ID = :player ");
+        $this->db->bind('player', Session::get('PlayerGUID'));
+        return $this->db->single();
+    }
 }

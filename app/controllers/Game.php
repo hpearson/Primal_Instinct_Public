@@ -54,6 +54,8 @@ class Game extends Controller {
             $this->SQL->MovePlayer($data['location']);
             // Trample the grass in new title
             $this->SQL->TrampleGrass($data['location']);
+            // Reduce player AP for this action
+            $this->SQL->ReduceAP();
             redirect('game/');
         } else {
             Inform::push_warning('Failed to moved.');
@@ -62,7 +64,11 @@ class Game extends Controller {
     }
     
     private function movement_check($data) {
-        //Load current players X/Y
+        // Look up players actions left
+        if ($this->SQL->GetAP()->AP == 0){
+            $data['location_err'] = true;
+        }
+        
         // Get Player Gameboard location
         $location = $this->SQL->GetPlayerLocation();
         // Look up Gameboard data
