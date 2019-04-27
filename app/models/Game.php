@@ -56,5 +56,10 @@ class Game_Model {
         return $this->db->execute();
     }
     
+    public function TrampleGrass($data) {
+        $this->db->query("UPDATE GameBoard SET Vegitation = Vegitation - 1 WHERE ID = :location");
+        $this->db->bind('location', $data);
+        return $this->db->execute();        
+    }
     
 }
