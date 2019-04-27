@@ -4,11 +4,11 @@ class Router {
 
     public function __construct() {
         // Load in the URL Array
-        $URL = $this->getURL();
+        $URL = Router::getURL();
         $Controller = $URL[0];
         $Method = $URL[1];
         $Args = $URL[2];
-
+        
         // Check if the Controller file exists
         if (file_exists('./App/Controllers/' . $Controller . '.php')) {
             // Pull in the controller file
@@ -40,10 +40,8 @@ class Router {
         // Read and split the URL
         $url = explode('/', trim(URI, '/'));
 
-        //Security Check URLS
+        // Security Check URLS ( should only have 2 backslashes )
         if (count($url) > 3) {
-            //echo '<br>';
-            //echo 'Error too much data in URL';
             Inform::push_error('Malformed URL Recieved');
             redirect('Errors'); die();
         }

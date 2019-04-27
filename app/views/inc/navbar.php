@@ -13,25 +13,28 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo URLROOT; ?>index/about">About</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Errors
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?php echo URLROOT; ?>Errors">Display Error</a>
-                        <a class="dropdown-item" href="<?php echo URLROOT; ?>Errors/Test">Test Error</a>
-                        <a class="dropdown-item" href="<?php echo URLROOT; ?>Errors/Report">Report Error</a>
-                    </div>
-                </li>                
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Debug
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?php echo URLROOT; ?>Debug">Index</a>
-                        <a class="dropdown-item" href="<?php echo URLROOT; ?>Debug/DatabaseTester">Database Tester</a>
-                    </div>
-                </li>
+                <?php if ( DEBUG ): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Errors
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="<?php echo URLROOT; ?>Errors">Display Error</a>
+                            <a class="dropdown-item" href="<?php echo URLROOT; ?>Errors/Test">Test Error</a>
+                            <a class="dropdown-item" href="<?php echo URLROOT; ?>Errors/Report">Report Error</a>
+                        </div>
+                    </li>    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Debug
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="<?php echo URLROOT; ?>Debug">Index</a>
+                            <a class="dropdown-item" href="<?php echo URLROOT; ?>Debug/DatabaseTester">Database Tester</a>
+                        </div>
+                    </li>
+                <?php endif ?>     
             </ul>
 
             <ul class="navbar-nav ml-auto">
