@@ -51,8 +51,9 @@ class Game_Model {
     }
     
     public function MovePlayer($data) {
-        $this->db->query("UPDATE Player SET Player_Location = :location");
+        $this->db->query("UPDATE Player SET Player_Location = :location WHERE ID = :player ");
         $this->db->bind('location', $data);
+        $this->db->bind('player', Session::get('PlayerGUID'));
         return $this->db->execute();
     }
     
@@ -61,4 +62,13 @@ class Game_Model {
         $this->db->bind('location', $data);
         return $this->db->execute();        
     }
+    
+    public function GetNeighbors($data) {
+        $this->db->query("SELECT * FROM Player WHERE Player_Location = :location AND ID != :player ");
+        $this->db->bind('location', $data);
+        $this->db->bind('player', Session::get('PlayerGUID'));
+        return $this->db->resultSet();
+    }
+    
+    
 }

@@ -20,7 +20,8 @@ class Game extends Controller {
         // Look up Gameboard data
         $MapData = $this->SQL->GetMap($location->ID);
 
-
+        // Players at this location
+        $NearPlayers = $this->SQL->GetNeighbors($location->ID);
 
         //$HTMLsafe = Secure::HTML($data);
 	//$this->view('game/index', $data);
@@ -29,6 +30,7 @@ class Game extends Controller {
         require APPROOT . '/views/inc/inform.php';
 
         $this->view('game/_gameboard', $MapData);
+        $this->view('game/_nearplayers', $NearPlayers);
 
         require APPROOT . '/views/inc/footer.php'; 
     }
