@@ -55,8 +55,12 @@ class Game_Model {
     }
     
     public function MovePlayer($data) {
-        $this->db->query("UPDATE Player SET Player_Location = :location WHERE ID = :player ");
+        $this->db->query("
+                INSERT INTO TileLog (EventLocation, EventDesc) VALUES (:location_1,'A Player has entered this location.')
+                UPDATE Player SET Player_Location = :location WHERE ID = :player 
+            ");
         $this->db->bind('location', $data);
+        $this->db->bind('location_1', $data);
         $this->db->bind('player', Session::get('PlayerGUID'));
         return $this->db->execute();
     }
@@ -102,4 +106,9 @@ class Game_Model {
         return $this->db->single();
     }   
     
+    public function GetHistory($data) {
+        $this->db->query("SELECT TOP 100 * FROM TileLog WHERE EventLocation = :location ORDER BY EventTime DESC");
+        $this->db->bind('location', $data);
+        return $this->db->resultSet();
+    }
 }

@@ -12,7 +12,6 @@ class Game extends Controller {
 
         // Get Player Gameboard location
         $location = $this->SQL->GetPlayerLocation();
-
         // Look up Gameboard data
         $MapData = $this->SQL->GetMap($location->ID);
         // Attach player data
@@ -43,6 +42,7 @@ class Game extends Controller {
             echo '<div class="col-sm">';
                 $this->view('game/_nearplayers', $NearPlayers);
                 $this->view('game/_actions', $data);
+                $this->view('game/_tilelog', $this->SQL->GetHistory($location->ID));
             echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -59,13 +59,7 @@ class Game extends Controller {
             'location_err' => ''
         ];
         $data = $this->movement_check($input);
-        //$data['HAS_ERRORS'] = true;
         if ($data['HAS_ERRORS'] == false) {
-                //TODO
-                // Get Player Gameboard location
-                //$location = $this->SQL->GetPlayerLocation();
-                // Trample the grass in current title
-                //$this->SQL->TrampleGrass($location->ID);
             // Move the player to the new location
             $this->SQL->MovePlayer($data['location']);
             // Trample the grass in new title

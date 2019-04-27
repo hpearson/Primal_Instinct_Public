@@ -1,9 +1,5 @@
 
 
-
-
-
-
 <div class="row">
     <form action="<?php echo URLROOT; ?>PlayerActions/cut" method="post" autocomplete="off">
         <input type="hidden" name="_token" value="<?php echo Session::get('_token'); ?>">
