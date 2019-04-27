@@ -1,7 +1,12 @@
 <style>
-    td { 
-        padding:40px;
+    tr {
         text-align: center;
+        width: 150px;
+        height: 150px;
+    }
+
+    td {
+        width: 150px;
     }
 </style>
 
@@ -39,8 +44,10 @@
                 echo '<input type="hidden" name="_token" value="'.Session::get('_token').'"></div>';
                 echo '</div>';
                 echo '</form>';
-                echo '<br>';
-                echo 'Players: '.$data->Players;
+                if ($data->Players > 0){
+                    echo '<br>';
+                    echo 'Players: '.$data->Players;
+                }
             }
             echo '<br>';
             echo $data->Vegitation;
