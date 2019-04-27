@@ -12,5 +12,10 @@ class Debug_Model {
         $this->db->query("SELECT 'asd' as 'asd' UNION ALL SELECT 'asd1' as 'asd'");
         return $this->db->resultSet();
     }
+    
+    public function BrokenSQL() {
+        $this->db->query("SELECT 'asd' as asd' as 'asd'");
+        return $this->db->resultSet();
+    }
 
 }

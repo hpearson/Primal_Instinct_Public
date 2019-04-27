@@ -35,6 +35,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="<?php echo URLROOT; ?>Debug">Index</a>
                             <a class="dropdown-item" href="<?php echo URLROOT; ?>Debug/DatabaseTester">Database Tester</a>
+                            <a class="dropdown-item" href="<?php echo URLROOT; ?>Debug/BrokenSQL">Submit Broken SQL</a>
                         </div>
                     </li>
                 <?php endif ?>     

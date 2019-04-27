@@ -26,4 +26,15 @@ class Debug extends Controller {
         $this->view('debug/databaseTester', $data);
     }
 
+    public function BrokenSQL() {
+        $this->SQL = $this->SQL->BrokenSQL();
+
+        $data = [
+            'title' => 'Debug Test Database'
+            , 'SQL' => $this->SQL
+        ];
+
+        $this->view('debug/databaseTester', $data);
+    }
+    
 }
