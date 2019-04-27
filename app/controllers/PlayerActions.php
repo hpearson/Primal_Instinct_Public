@@ -5,7 +5,6 @@ class PlayerActions extends Controller {
     private $SQL2;
     
     public function __construct(){
-	//$this->SQL = $this->model('Game');
         $this->SQL2 = $this->model('Game');
     }
     
@@ -45,4 +44,55 @@ class PlayerActions extends Controller {
         return($data);
     }
     
+    public function attack_POST(){
+        if (!Session::get('SignedIn')){redirect(''); die;}
+        $input = [
+            'target' => POSTDATA['target'],
+        ];
+        // Process the form
+        $data = $this->attack_check($input);
+        
+        if ($data['HAS_ERRORS'] == false) {
+            //$this->SQL->MovePlayer($data['location']);
+
+            // Reduce player AP for this action
+            $this->SQL2->ReduceHP($data['target']);           
+            
+            // Reduce player AP for this action
+            $this->SQL2->ReduceAP();
+            Inform::push_warning('Your strike lands true.');
+            redirect('game/');
+        } else {
+            Inform::push_warning('Failed to attack.');
+            redirect('game/');
+        }
+    }
+    
+    public function attack_check($data){
+        // Look up players actions left
+        if ($this->SQL2->GetAP()->AP == 0){
+            $data['attack_err'] = true;
+        }
+        
+        // Get Player Gameboard location
+        $player_location = $this->SQL2->GetPlayerLocation();
+        
+        // Get Target Gameboard location
+        $target_location = $this->SQL2->GetPlayerLocation($data['target']);
+        
+        // Compare player locations
+        if ($player_location != $target_location){
+            $data['attack_err'] = true;
+        }
+        
+        // Set error flag if an error was found
+        $data['HAS_ERRORS'] = true;
+        if (
+            empty($data['attack_err'])
+        ) {
+            $data['HAS_ERRORS'] = false;
+        }
+        // Return to the controller
+        return($data);
+    }
 }

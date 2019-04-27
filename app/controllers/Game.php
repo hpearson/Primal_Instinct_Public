@@ -9,10 +9,6 @@ class Game extends Controller {
     
     public function index(){
         if (!Session::get('SignedIn')){redirect(''); die;}
-        
-        //TODO
-	$data = [
-	];
 
         // Get Player Gameboard location
         $location = $this->SQL->GetPlayerLocation();
@@ -25,6 +21,12 @@ class Game extends Controller {
 
         //$HTMLsafe = Secure::HTML($data);
 	//$this->view('game/index', $data);
+        
+        //TODO
+	$data = [
+            'location' => $location->ID,
+            'nearplayers' => $NearPlayers
+	];        
 
         require APPROOT . '/views/inc/header.php';
         require APPROOT . '/views/inc/inform.php';

@@ -71,7 +71,7 @@
                 echo '<div class="row">';
                 echo '<div class="col">';
                 if ($data->Players > 0){
-                    echo '<span class="badge badge-pill badge-primary">'.$data->Players.'</span>';
+                    echo '<span class="badge badge-pill badge-danger">'.$data->Players.'</span>';
                 }
                 
                 if ($data->LocationName != '') {$class = ''; } else { $class = 'btn-success';}
@@ -80,7 +80,7 @@
                 echo '</form>';
             } else {
                 if ($data->Players-1 > 0){
-                    echo '<span class="badge badge-pill badge-primary">'.($data->Players - 1).'</span>';
+                    echo '<span class="badge badge-pill badge-danger">'.($data->Players - 1).'</span>';
                 }
             }
             echo '</td>';            

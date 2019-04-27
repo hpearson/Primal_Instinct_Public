@@ -8,7 +8,7 @@ class Game_Model {
         $this->db = new Database;
     }
 
-    public function GetPlayerLocation() {
+    public function GetPlayerLocation($target = null) {
         $this->db->query("
             SELECT GameBoard.ID
             FROM Player
@@ -17,7 +17,11 @@ class Game_Model {
             WHERE Player.ID = :player
         ");
         
-        $this->db->bind('player', Session::get('PlayerGUID'));
+        if ($target == null){
+            $this->db->bind('player', Session::get('PlayerGUID'));
+        } else {
+            $this->db->bind('player', $target);
+        }
         return $this->db->single();
     }
     
@@ -79,6 +83,16 @@ class Game_Model {
     public function ReduceAP() {
         $this->db->query("UPDATE Player SET AP = AP - 1 WHERE ID = :player ");
         $this->db->bind('player', Session::get('PlayerGUID'));
+        return $this->db->execute();
+    }
+    
+    public function ReduceHP($target = null) {
+        $this->db->query("UPDATE Player SET HP = HP - 1 WHERE ID = :player ");
+        if ($target == null){
+            $this->db->bind('player', Session::get('PlayerGUID'));
+        } else {
+            $this->db->bind('player', $target);
+        }
         return $this->db->execute();
     }
 }
