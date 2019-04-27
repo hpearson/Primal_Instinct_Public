@@ -1,12 +1,14 @@
-<?php
 
-if ( count($data) > 0){
-    echo 'There are '.count($data).' players nearby';
-    echo '<br>';
-    foreach ($data as $value) {
-        echo Secure::HTML($value->Username).'; ';
+<div class="row">
+    <?php if ( count($data) > 0): ?>
+    <?php     
+        foreach ($data as $value) {
+        echo '<u>'.Secure::HTML($value->Username).'</u>&nbsp;';
     }
-} else {
-    echo 'Nobody is nearby';
-}
-
+    ?> is also here.
+    
+    <?php else: ?>
+    There is nobody around.
+    <?php endif; ?>
+</div>
+<br>

@@ -1,14 +1,18 @@
 <style>
+    table {
+        margin-left:auto; 
+        margin-right:auto;
+    }
     tr.map_grid {
         text-align: center;
         width: 150px;
         height: 150px;
     }
     th {
-        background: #666;
+        background: #888;
         text-align: center;
-        border: #444 solid;
-        border-width: 0px 0px 2px 0px;
+        border: #555 solid;
+        border-width: 2px 0px 2px 0px;
     }
     td {
         width: 150px;
@@ -58,7 +62,6 @@
                     echo '<span class="badge badge-pill badge-primary">'.$data->Players.'</span>';
                 }
                 echo '<input type="submit" value=" '.$Name.' " class="btn btn-success btn-block">';
-                echo '<input type="hidden" name="_token" value="'.Session::get('_token').'"></div>';
                 echo '</div>';
                 echo '</form>';
             } else {

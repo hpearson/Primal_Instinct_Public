@@ -29,9 +29,18 @@ class Game extends Controller {
         require APPROOT . '/views/inc/header.php';
         require APPROOT . '/views/inc/inform.php';
 
-        $this->view('game/_gameboard', $MapData);
-        $this->view('game/_nearplayers', $NearPlayers);
-
+        echo '<div class="container">';
+        echo '<div class="row">';
+            echo '<div class="col-sm">';
+                $this->view('game/_gameboard', $MapData);
+            echo '</div>';
+            echo '<div class="col-sm">';
+                $this->view('game/_nearplayers', $NearPlayers);
+                $this->view('game/_actions', $data);
+            echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        
         require APPROOT . '/views/inc/footer.php'; 
     }
 
