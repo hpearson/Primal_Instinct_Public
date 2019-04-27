@@ -19,7 +19,6 @@ class Index extends Controller {
              'title' => 'About'
             ,'version' => VERSION
 	];
-	
 	$this->view('index/about', $data);
     }
 	

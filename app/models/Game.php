@@ -56,7 +56,7 @@ class Game_Model {
     
     public function MovePlayer($data) {
         $this->db->query("
-                INSERT INTO TileLog (EventLocation, EventDesc) VALUES (:location_1,'A Player has entered this location.')
+                INSERT INTO TileLog (EventLocation, EventDesc) VALUES (:location_1,'A player entered this location.')
                 UPDATE Player SET Player_Location = :location WHERE ID = :player 
             ");
         $this->db->bind('location', $data);
@@ -90,13 +90,15 @@ class Game_Model {
         return $this->db->execute();
     }
     
-    public function ReduceHP($target = null) {
-        $this->db->query("UPDATE Player SET HP = HP - 1 WHERE ID = :player ");
-        if ($target == null){
-            $this->db->bind('player', Session::get('PlayerGUID'));
-        } else {
-            $this->db->bind('player', $target);
-        }
+    public function ReduceHP($target) {
+        $this->db->query("
+                UPDATE Player SET HP = HP - 1 WHERE ID = :player 
+                INSERT INTO TileLog (EventLocation, EventDesc) VALUES (
+                (SELECT Player_Location FROM Player WHERE ID = :player_1)
+                ,'A player was attacked!')
+                ");
+        $this->db->bind('player', $target);
+        $this->db->bind('player_1', $target);
         return $this->db->execute();
     }
     
@@ -111,4 +113,8 @@ class Game_Model {
         $this->db->bind('location', $data);
         return $this->db->resultSet();
     }
+    
+    
+    
+    
 }
