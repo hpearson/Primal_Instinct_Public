@@ -56,12 +56,16 @@ class Game_Model {
     
     public function MovePlayer($data) {
         $this->db->query("
+                INSERT INTO TileLog (EventLocation, EventDesc) VALUES (
+                (SELECT Player_Location FROM Player WHERE ID = :player_1)
+                ,'A player has left this location.')
                 INSERT INTO TileLog (EventLocation, EventDesc) VALUES (:location_1,'A player entered this location.')
                 UPDATE Player SET Player_Location = :location WHERE ID = :player 
             ");
         $this->db->bind('location', $data);
         $this->db->bind('location_1', $data);
         $this->db->bind('player', Session::get('PlayerGUID'));
+        $this->db->bind('player_1', Session::get('PlayerGUID'));
         return $this->db->execute();
     }
     
