@@ -21,7 +21,14 @@
 
 <table>
     <tr>
-        <th colspan = "3">Location Name <?php echo $data[4]->Vegitation; ?></th>
+        <th colspan = "3">
+            <?php 
+            if($data[4]->LocationName==''){
+                echo 'Unnamed Location';
+            }else{
+                echo Secure::HTML($data[4]->LocationName);
+            }?>
+        </th>
     </tr>
     <tr class="map_grid">
         <?php DisplayMapSection($data[0]); ?>
@@ -45,12 +52,17 @@
         if ($data->Grid_X == 100 || $data->Grid_X == 0 || $data->Grid_Y == 100 || $data->Grid_Y == 0){
             echo '<td style="background: #666;"></td>';
         } else {
+            
             $Name = 'Thick Jungle';
             if ($data->Vegitation < 80){$Name = 'Dense Jungle';}
             if ($data->Vegitation < 60){$Name = 'Jungle';}
             if ($data->Vegitation < 40){$Name = 'Forrest';}
             if ($data->Vegitation < 20){$Name = 'Clearing';}
             if ($data->Vegitation < 10){$Name = 'Open Clearing';}
+            if ($data->LocationName != ''){
+                $Name = Secure::HTML($data->LocationName);
+            }
+            
             echo '<td style="background-color: rgb(0,' . (150 - $data->Vegitation) . ',0)">';
             if ($mid == false) {
                 echo '<form action="'.URLROOT.'game/movement" method="post" autocomplete="off">';
@@ -61,7 +73,9 @@
                 if ($data->Players > 0){
                     echo '<span class="badge badge-pill badge-primary">'.$data->Players.'</span>';
                 }
-                echo '<input type="submit" value=" '.$Name.' " class="btn btn-success btn-block">';
+                
+                if ($data->LocationName != '') {$class = ''; } else { $class = 'btn-success';}
+                echo '<input type="submit" value=" '.$Name.' " class="btn '.$class.' btn-block">';
                 echo '</div>';
                 echo '</form>';
             } else {
@@ -72,4 +86,5 @@
             echo '</td>';            
         }
     }
+    
 ?>
