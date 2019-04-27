@@ -118,7 +118,15 @@ class Game_Model {
         return $this->db->resultSet();
     }
     
-    
-    
+    public function SprayGraffiti($data) {
+        $this->db->query("
+                INSERT INTO TileLog (EventLocation, EventDesc) VALUES (
+                :location
+                ,'Graffiti: ' + :text)
+                ");   
+        $this->db->bind('location', $data['location']);
+        $this->db->bind('text', $data['graffiti']);
+        return $this->db->execute();
+    }
     
 }

@@ -25,3 +25,12 @@
         </form>
     </div>
 <?php endif; ?>
+
+<br>
+<div class="row">
+    <form action="<?php echo URLROOT; ?>PlayerActions/graffiti" method="post" autocomplete="off">
+        <input type="hidden" name="_token" value="<?php echo Session::get('_token'); ?>">
+        <input type="text" name="graffiti" class="form-control">
+        <input type="submit" value="Spray Graffiti" class="btn btn-block">
+    </form>
+</div>

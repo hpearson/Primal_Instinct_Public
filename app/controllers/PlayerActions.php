@@ -2,10 +2,9 @@
 
 class PlayerActions extends Controller {  
     private $SQL;
-    private $SQL2;
     
     public function __construct(){
-        $this->SQL2 = $this->model('Game');
+        $this->SQL = $this->model('Game');
     }
     
     public function cut_POST(){
@@ -16,11 +15,11 @@ class PlayerActions extends Controller {
         //$data['HAS_ERRORS'] = true;
         if ($data['HAS_ERRORS'] == false) {        
             // Get Player Gameboard location
-            $location = $this->SQL2->GetPlayerLocation();
+            $location = $this->SQL->GetPlayerLocation();
             // Trample the grass in current title
-            $this->SQL2->TrampleGrass($location->ID);
+            $this->SQL->TrampleGrass($location->ID);
             // Reduce player AP for this action
-            $this->SQL2->ReduceAP();
+            $this->SQL->ReduceAP();
             redirect('game/');
         } else {
             Inform::push_warning('Failed to cut vegitation.');
@@ -30,7 +29,7 @@ class PlayerActions extends Controller {
     
     public function cut_check($data){
         // Look up players actions left
-        if ($this->SQL2->GetAP()->AP == 0){
+        if ($this->SQL->GetAP()->AP == 0){
             $data['cut_err'] = true;
         }
         // Set error flag if an error was found
@@ -56,10 +55,10 @@ class PlayerActions extends Controller {
             //$this->SQL->MovePlayer($data['location']);
 
             // Reduce player AP for this action
-            $this->SQL2->ReduceHP($data['target']);           
+            $this->SQL->ReduceHP($data['target']);           
             
             // Reduce player AP for this action
-            $this->SQL2->ReduceAP();
+            $this->SQL->ReduceAP();
             Inform::push_warning('Your strike lands true.');
             redirect('game/');
         } else {
@@ -70,15 +69,15 @@ class PlayerActions extends Controller {
     
     public function attack_check($data){
         // Look up players actions left
-        if ($this->SQL2->GetAP()->AP == 0){
+        if ($this->SQL->GetAP()->AP == 0){
             $data['attack_err'] = true;
         }
         
         // Get Player Gameboard location
-        $player_location = $this->SQL2->GetPlayerLocation();
+        $player_location = $this->SQL->GetPlayerLocation();
         
         // Get Target Gameboard location
-        $target_location = $this->SQL2->GetPlayerLocation($data['target']);
+        $target_location = $this->SQL->GetPlayerLocation($data['target']);
         
         // Compare player locations
         if ($player_location != $target_location){
@@ -95,4 +94,46 @@ class PlayerActions extends Controller {
         // Return to the controller
         return($data);
     }
+    
+    
+   public function graffiti_POST(){
+        if (!Session::get('SignedIn')){redirect(''); die;}
+        $input = [
+            'graffiti' => POSTDATA['graffiti'],
+        ];
+        // Process the form
+        $data = $this->graffiti_check($input);
+        if ($data['HAS_ERRORS'] == false) {        
+            // Get Player Gameboard location
+            $location = $this->SQL->GetPlayerLocation();
+            $data['location'] = $location->ID;
+            // Spray the graffiti
+            $this->SQL->SprayGraffiti($data);
+            // Reduce player AP for this action
+            $this->SQL->ReduceAP();
+            redirect('game/');
+        } else {
+            Inform::push_warning('Failed to spray graffiti.');
+            redirect('game/');            
+        }
+    }
+    
+    public function graffiti_check($data){
+        $data['graffiti_err'] = RuleLookup::Graffiti($data['graffiti']);
+        // Look up players actions left
+        if ($this->SQL->GetAP()->AP == 0){
+            $data['graffiti_err'] = true;
+        }
+        // Set error flag if an error was found
+        $data['HAS_ERRORS'] = true;
+        if (
+            empty($data['graffiti_err'])
+        ) {
+            $data['HAS_ERRORS'] = false;
+        }
+        // Return to the controller
+        return($data);
+    }
+    
+    
 }

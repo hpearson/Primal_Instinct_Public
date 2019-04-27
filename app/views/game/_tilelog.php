@@ -5,7 +5,7 @@
         foreach ($data as $value) {
             echo get_timeago(strtotime($value->EventTime));
             echo ' | ';
-            echo $value->EventDesc;
+            echo Secure::HTML($value->EventDesc);
             echo '<br>';
         }
         ?>
