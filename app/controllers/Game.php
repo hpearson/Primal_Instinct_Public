@@ -46,10 +46,11 @@ class Game extends Controller {
         $data = $this->movement_check($input);
         //$data['HAS_ERRORS'] = true;
         if ($data['HAS_ERRORS'] == false) {
-            // Get Player Gameboard location
-            $location = $this->SQL->GetPlayerLocation();
-            // Trample the grass in current title
-            $this->SQL->TrampleGrass($location->ID);
+                //TODO
+                // Get Player Gameboard location
+                //$location = $this->SQL->GetPlayerLocation();
+                // Trample the grass in current title
+                //$this->SQL->TrampleGrass($location->ID);
             // Move the player to the new location
             $this->SQL->MovePlayer($data['location']);
             // Trample the grass in new title
