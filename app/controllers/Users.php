@@ -41,18 +41,10 @@ class Users extends Controller {
             // Encrypt the user password
             $input['password'] = password_hash($input['password'], PASSWORD_BCRYPT, [12]);
             
-            
             $Var_Input = $input;
             $this->SQL = $this->SQL->CreateUserAccount($Var_Input);
             Inform::push_info('Your account has been created.');
             redirect('users/login');
-            
-            
-            
-            
-            
-            // Validated
-            //die('SUCCESS');
         } else {
             $HTMLsafe = Secure::HTML($data);
             $this->view('users/register', $HTMLsafe);
@@ -82,7 +74,25 @@ class Users extends Controller {
         ];
         
         $data = $this->login_check_error($input);
-
+        
+        // Don't pester database if we dont have to
+        if ($data['HAS_ERRORS'] == false){
+        
+            // Check if there is an email
+            $DBRecord = $this->SQL->EmailExists($data);
+            if (empty($DBRecord)){
+                $data['HAS_ERRORS'] = true;
+                $data['email_err'] = 'Email not found';
+            } else {
+                // Email was found compare the passwords
+                if (!password_verify(POSTDATA['password'], $DBRecord->Player_Password)) { 
+                    $data['HAS_ERRORS'] = true;
+                    $data['password_err'] = 'Password does not match';
+                }
+            }
+        }
+        
+        //$data['HAS_ERRORS'] = true;
         if ($data['HAS_ERRORS'] == false) {
             // Validated
             die('SUCCESS');
@@ -90,24 +100,24 @@ class Users extends Controller {
             $HTMLsafe = Secure::HTML($data);
             $this->view('users/login', $HTMLsafe);
         }
-
     }
     
     private function register_check_error($data) {
         $data['username_err'] = RuleLookup::Username($data['username']);
-        // Check if the username already exists in the database
-        if (!empty($this->SQL->UsernameExists($data))){
-            $data['username_err'] = 'Username is taken';
+        if ($data['username_err'] == ''){
+            if (!empty($this->SQL->UsernameExists($data))){
+                $data['username_err'] = 'Username is taken';
+            }
         }
         
         $data['email_err'] = RuleLookup::Email($data['email']);
-        // Check if the email already exists in the database TODO
-        if (!empty($this->SQL->EmailExists($data))){
-            $data['email_err'] = 'Email is already in use';
+        if ($data['email_err'] == ''){
+            if (!empty($this->SQL->EmailExists($data))){
+                $data['email_err'] = 'Email is already in use';
+            }           
         }
-        
+
         $data['password_err'] = RuleLookup::Password($data['password']);
-        
         $data['confirm_password_err'] = RuleLookup::ConfPasswords($data['password'],$data['confirm_password']);
 
         // Set error flag if an error was found
@@ -126,7 +136,6 @@ class Users extends Controller {
     
     public function login_check_error($data) {
         $data['email_err'] = RuleLookup::Email($data['email']);
-        
         $data['password_err'] = RuleLookup::Password($data['password']);
 
         // Set error flag if an error was found
