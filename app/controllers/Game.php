@@ -15,6 +15,10 @@ class Game extends Controller {
 
         // Look up Gameboard data
         $MapData = $this->SQL->GetMap($location->ID);
+        // Attach player data
+        $MapData['PlayerStatus'] = $this->SQL->GetStatus();
+        
+        
 
         // Players at this location
         $NearPlayers = $this->SQL->GetNeighbors($location->ID);

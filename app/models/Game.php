@@ -95,4 +95,11 @@ class Game_Model {
         }
         return $this->db->execute();
     }
+    
+    public function GetStatus() {
+        $this->db->query("SELECT * FROM Player WHERE ID = :player ");
+        $this->db->bind('player', Session::get('PlayerGUID'));
+        return $this->db->single();
+    }   
+    
 }

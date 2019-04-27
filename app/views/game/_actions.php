@@ -11,10 +11,8 @@
     </form>
 </div>
 
-
-<br>
-
 <?php if(count($data['nearplayers']) > 0 ): ?>
+<br>
     <div class="row">
         <form action="<?php echo URLROOT; ?>PlayerActions/attack" method="post" autocomplete="off">
             <input type="hidden" name="_token" value="<?php echo Session::get('_token'); ?>">
@@ -31,11 +29,3 @@
         </form>
     </div>
 <?php endif; ?>
-
-
-<div class="row">
-    asd
-</div>
-<div class="row">
-    asd
-</div>

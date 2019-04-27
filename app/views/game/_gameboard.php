@@ -20,14 +20,14 @@
 </style>
 
 <table>
-    <tr>
+    <tr> 
         <th colspan = "3">
-            <?php 
-            if($data[4]->LocationName==''){
+            <?php
+            if ($data[4]->LocationName == '') {
                 echo 'Unnamed Location';
-            }else{
+            } else {
                 echo Secure::HTML($data[4]->LocationName);
-            }?>
+            } ?>
         </th>
     </tr>
     <tr class="map_grid">
@@ -44,6 +44,22 @@
         <?php DisplayMapSection($data[6]); ?>
         <?php DisplayMapSection($data[7]); ?>
         <?php DisplayMapSection($data[8]); ?>
+    </tr>
+    <tr> 
+        <th colspan = "3" style="text-align: left;">
+            &nbsp;Health:
+            <span class="badge badge-pill badge-danger">
+                 <?php echo $data['PlayerStatus']->HP; ?>
+            </span>
+        </th>
+    </tr>
+    <tr> 
+        <th colspan = "3" style="text-align: left;">
+            &nbsp;Action Points:
+            <span class="badge badge-pill badge-primary">
+                <?php echo $data['PlayerStatus']->AP; ?>
+            </span>
+        </th>
     </tr>
 </table>
 
