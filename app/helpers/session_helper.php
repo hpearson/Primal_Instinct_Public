@@ -7,6 +7,10 @@ class Session {
     // 2) InformError
     // 3) InformWarning
     // 4) InformInfo
+    // 5) SignedIn
+    // 6) PlayerName
+    // 7) PlayerGUID
+    
     
     static function init() {
         session_start();
@@ -17,7 +21,6 @@ class Session {
         if (!isset($_SESSION['_token']) || empty($_SESSION['_token'])) {
             Session::set('_token', bin2hex(openssl_random_pseudo_bytes(16)));
         } 
-        
     }
 
     static function set($key, $value) {

@@ -14,12 +14,11 @@ check datatypes of all input
 
 
 
-9:10pm 04/26/2019
-Core Framework should be done
-Error reporting is fully completed 
-Next: User registration and login
 
 
+Players can log into their char
+Game board being made now
 
 
-Fix
+About page has been completed
+Users must be logged in to see game board

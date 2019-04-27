@@ -11,13 +11,15 @@ class Users_Model {
     public function CreateUserAccount($data) {
         $this->db->query("
             INSERT INTO Player ( 
+                Player_Location,
                 Username, 
                 Email, 
-                Player_Password 
+                Player_Password
             ) VALUES ( 
+                ( SELECT TOP 1 ID FROM GameBoard WHERE Vegitation != 0 ORDER BY NEWID() ),
                 :username, 
                 :email, 
-                :password 
+                :password
             )"
         );
         $this->db->bind('username', $data['username']);

@@ -92,14 +92,24 @@ class Users extends Controller {
             }
         }
         
-        //$data['HAS_ERRORS'] = true;
         if ($data['HAS_ERRORS'] == false) {
             // Validated
-            die('SUCCESS');
+            Session::set('SignedIn', true);
+            Session::set('PlayerName', $DBRecord->Username);
+            Session::set('PlayerGUID', $DBRecord->ID);
+            redirect('game/');
         } else {
             $HTMLsafe = Secure::HTML($data);
             $this->view('users/login', $HTMLsafe);
         }
+    }
+    
+    public function logout() {
+        $data = [
+        ];
+
+        Session::destroy();
+        redirect('');
     }
     
     private function register_check_error($data) {
