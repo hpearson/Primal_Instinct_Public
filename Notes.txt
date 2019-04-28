@@ -2,7 +2,6 @@ Bugs:
 static objects not being served
 
 Features:
-Regen Health every 30 minutes
 Kill count
 Kill count is currency to rename the tile
 vegitation into DB

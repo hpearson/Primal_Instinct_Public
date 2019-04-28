@@ -72,8 +72,15 @@ class Game_Model {
         $this->db->query("EXEC UpdateHP @player = :player, @Amount = :amount");
         $this->db->bind('player', $player);
         $this->db->bind('amount', $amount);
-        return $this->db->execute();
+        return $this->db->single();
     }
+    
+    public function UpdateKills($player, $amount){
+        $this->db->query("EXEC UpdateKills @player = :player, @Amount = :amount");
+        $this->db->bind('player', $player);
+        $this->db->bind('amount', $amount);
+        return $this->db->execute();      
+    }   
     
     public function InsertTileLog($location, $desc){
         $this->db->query("EXEC InsertTileLog @EventLocation = :location, @EventDesc = :text");   

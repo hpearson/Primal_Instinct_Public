@@ -53,11 +53,16 @@ class PlayerActions extends Controller {
         // Process the form
         $data = $this->attack_check($input);
         if ($data['HAS_ERRORS'] == false) {
+            Inform::push_info('Your strike lands true.');
             // Reduce player HP for this action
-            $this->SQL->UpdateHP($data['target'],-1); 
+            $kill = $this->SQL->UpdateHP($data['target'],-1); 
+            if($kill->Killed == 1){
+                //Add kill to score
+                $this->SQL->UpdateKills(Session::get('PlayerGUID'),1); 
+                Inform::push_info('The kill is yours.');
+            }
             // Reduce player AP for this action
             $this->SQL->UpdateAP(Session::get('PlayerGUID'),-1);
-            Inform::push_warning('Your strike lands true.');
             redirect('game/');
         } else {
             Inform::push_warning('Failed to attack.');
