@@ -1,16 +1,17 @@
 <?php
 
 class Index extends Controller {  
-	  
-    public function __construct(){
-		
+    private $SQL;
+
+    public function __construct() {
+        $this->SQL = $this->model('Index');
     }
     
     public function index(){
 	$data = [
             'title' => 'Home Page',
+            'players' => $this->SQL->GetAliveOrDeadPlayers()
 	];
-
 	$this->view('index/index', $data);
     }
 

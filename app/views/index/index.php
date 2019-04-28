@@ -4,9 +4,20 @@
     <h1>🦖Primal Instinct🦖</h1>
 
 
-
-<h4>Goal: to kill other players and try to stay alive</h4>
 <br><br>
+<h4>An online browser based battle royal game!</h4>
+
+<br>
+<h4>Status:</h4>
+<ul>
+    <li>
+        <b><?php print_r($data['players']->Alive); ?></b> players are alive🌻.
+    </li>
+    <li>
+        <b><?php print_r($data['players']->Dead); ?></b> players are dead⚰️.
+    </li>
+</ul>
+<br>
 <h4>⚙️Mechanics⚙️</h4>
 <ul>
     <li>Players spawn into a random location.</li>  
@@ -20,11 +31,6 @@
     <li>Players can graffiti🎨 a location.</li> 
     <li>Players can cut🔪 vegetation 🌴 in the game map🗺️. <span class="small">(Just Ａ Ｅ Ｓ Ｔ Ｈ Ｅ Ｔ Ｉ Ｃ for now)</span></li> 
 </ul>
-
-
-
-
-
 
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>
