@@ -1,7 +1,4 @@
 
-
-
-
 <?php if (count($data) > 0): ?>
     <?php
     foreach ($data as $value) {

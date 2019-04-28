@@ -26,9 +26,23 @@ body {
     border-color: #586a58;
     display:inline-block;
 }
-    .btn-primary:hover {
-    background-color: #8064A2;
-    border-color: #8064A2;
+table {
+    margin-left:auto; 
+    margin-right:auto;
+}
+tr.map_grid {
+    text-align: center;
+    width: 150px;
+    height: 150px;
+}
+th {
+    background: #888;
+    text-align: center;
+    border: #555 solid;
+    border-width: 2px 0px 2px 0px;
+}
+td {
+    width: 150px;
 }
 
  </style>

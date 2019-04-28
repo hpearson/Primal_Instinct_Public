@@ -31,7 +31,7 @@ class Debug extends Controller {
 
         $data = [
             'title' => 'Debug Test Database'
-            , 'SQL' => $this->SQL
+            ,'SQL' => $this->SQL
         ];
 
         $this->view('debug/databaseTester', $data);

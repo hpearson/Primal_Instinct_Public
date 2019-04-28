@@ -1,23 +1,3 @@
-<style>
-    table {
-        margin-left:auto; 
-        margin-right:auto;
-    }
-    tr.map_grid {
-        text-align: center;
-        width: 150px;
-        height: 150px;
-    }
-    th {
-        background: #888;
-        text-align: center;
-        border: #555 solid;
-        border-width: 2px 0px 2px 0px;
-    }
-    td {
-        width: 150px;
-    }
-</style>
 
 <table>
     <tr> 

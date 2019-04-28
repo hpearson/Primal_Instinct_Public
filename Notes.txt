@@ -14,7 +14,6 @@ check datatypes of all input
 
 static objects not being served
 Clean up homepage
-clean up about page
 LargeMap
 Kill count
 Kill count is currency to rename the title

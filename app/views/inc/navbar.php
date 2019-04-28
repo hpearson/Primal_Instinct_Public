@@ -14,6 +14,11 @@
                         <a class="nav-link" href="<?php echo URLROOT; ?>game/">Game</a>
                     </li>                
                 <?php endif ?>
+                    
+                    
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo URLROOT; ?>map">Map</a>
+                </li>                    
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo URLROOT; ?>index/about">About</a>
                 </li>
