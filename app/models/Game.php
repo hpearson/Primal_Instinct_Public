@@ -62,25 +62,32 @@ class Game_Model {
     }
     
     public function UpdateAP($player, $amount) {
-        $this->db->query("EXEC UpdateAP @player = :player, @Amount = :amount");
+        $this->db->query("EXEC UpdateAP @Player = :player, @Amount = :amount");
         $this->db->bind('player', $player);
         $this->db->bind('amount', $amount);
         return $this->db->execute();
     }
     
     public function UpdateHP($player, $amount) {
-        $this->db->query("EXEC UpdateHP @player = :player, @Amount = :amount");
+        $this->db->query("EXEC UpdateHP @Player = :player, @Amount = :amount");
         $this->db->bind('player', $player);
         $this->db->bind('amount', $amount);
         return $this->db->single();
     }
     
     public function UpdateKills($player, $amount){
-        $this->db->query("EXEC UpdateKills @player = :player, @Amount = :amount");
+        $this->db->query("EXEC UpdateKills @Player = :player, @Amount = :amount");
         $this->db->bind('player', $player);
         $this->db->bind('amount', $amount);
         return $this->db->execute();      
     }   
+    
+    public function UpdateTileName($location, $name){
+         $this->db->query("EXEC UpdateTileName @Location = :location, @Name = :name");
+        $this->db->bind('location', $location);
+        $this->db->bind('name', $name);
+        return $this->db->execute();        
+    }
     
     public function InsertTileLog($location, $desc){
         $this->db->query("EXEC InsertTileLog @EventLocation = :location, @EventDesc = :text");   

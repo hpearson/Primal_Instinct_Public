@@ -9,4 +9,3 @@
 <?php else: ?>
     There is nobody around.
 <?php endif; ?>
-<hr>

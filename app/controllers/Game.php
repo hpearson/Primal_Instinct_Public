@@ -22,7 +22,7 @@ class Game extends Controller {
         $MapData = $this->SQL->GetMap($location->ID);
         // Attach player data
         $MapData['PlayerStatus'] = $PlayerInfo;
-        // Players at this location
+        // Alive Players at this location
         $NearPlayers = $this->SQL->GetLocalPlayers($location->ID,Session::get('PlayerGUID'),true);
         // Dead Players at this location
         $DeadPlayers = $this->SQL->GetLocalPlayers($location->ID,Session::get('PlayerGUID'),false);
@@ -33,7 +33,8 @@ class Game extends Controller {
         //TODO
 	$data = [
             'location' => $location->ID,
-            'nearplayers' => $NearPlayers
+            'nearplayers' => $NearPlayers,
+            'player' => $PlayerInfo
 	];        
 
         require APPROOT . '/views/inc/header.php';

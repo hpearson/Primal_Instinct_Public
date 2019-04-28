@@ -1,12 +1,12 @@
 Bugs:
 static objects not being served
+Find all todos
+
 
 Features:
-Kill count
 Kill count is currency to rename the tile
 vegitation into DB
 Hide?
-Killing a player lets you rename the tile
 
 Aesthetics:
 Clean up homepage

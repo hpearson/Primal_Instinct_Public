@@ -1,5 +1,6 @@
 
 <?php if (count($data['nearplayers']) > 0): ?>
+    <hr>
     <form action="<?php echo URLROOT; ?>PlayerActions/attack" method="post" autocomplete="off">
         <input type="hidden" name="_token" value="<?php echo Session::get('_token'); ?>">
         <div class="container">
@@ -41,4 +42,20 @@
         </div>
     </div>
 </form>
-<hr>
+<?php if ($data['player']->Kills > 0): ?>
+    <hr>
+    <form action="<?php echo URLROOT; ?>PlayerActions/rename" method="post" autocomplete="off">
+        <input type="hidden" name="_token" value="<?php echo Session::get('_token'); ?>">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="submit" value="Rename Location" class="btn btn-block btn-secondary">
+                </div>
+                <div class="col-sm">
+                    <input type="text" name="rename" class="form-control">
+                </div>
+            </div>
+            <div class="small">*Spends a kill</div>
+        </div>
+    </form>
+<?php endif; ?>

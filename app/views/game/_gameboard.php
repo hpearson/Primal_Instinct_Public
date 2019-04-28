@@ -41,6 +41,14 @@
             </span>
         </th>
     </tr>
+    <tr> 
+        <th colspan = "3" style="text-align: left;">
+            &nbsp;Kills:
+            <span class="badge badge-pill badge-warning">
+                <?php echo $data['PlayerStatus']->Kills; ?>
+            </span>
+        </th>
+    </tr>
 </table>
 
 <?php 

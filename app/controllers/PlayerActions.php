@@ -138,5 +138,50 @@ class PlayerActions extends Controller {
         return($data);
     }
     
+   public function rename_POST(){
+        if (!Session::get('SignedIn')){redirect(''); die;}
+        $input = [
+            'rename' => POSTDATA['rename'],
+        ];
+        // Process the form
+        $data = $this->rename_check($input);
+        if ($data['HAS_ERRORS'] == false) {        
+            // Get Player Gameboard location
+            $location = $this->SQL->GetPlayerLocation(Session::get('PlayerGUID'));
+            // Rename the tile
+            $this->SQL->UpdateTileName($location->ID, $data['rename']);
+            // Reduce player AP for this action
+            $this->SQL->UpdateAP(Session::get('PlayerGUID'),-1);
+            // Reduce player Kills for this action
+            $this->SQL->UpdateKills(Session::get('PlayerGUID'),-1);
+            redirect('game/');
+        } else {
+            Inform::push_warning('Failed to rename tile.');
+            redirect('game/');            
+        }
+    }    
+    
+    public function rename_check($data){
+        $data['rename_err'] = RuleLookup::Rename($data['rename']);
+        // Look up player Data
+        $player = $this->SQL->GetPlayerData(Session::get('PlayerGUID'));
+        // Look up players actions left
+        if ($player->AP == 0){
+            $data['rename_err'] = true;
+        }
+        // Look up players kills left
+        if ($player->Kills == 0){
+            $data['rename_err'] = true;
+        }        
+        // Set error flag if an error was found
+        $data['HAS_ERRORS'] = true;
+        if (
+            empty($data['rename_err'])
+        ) {
+            $data['HAS_ERRORS'] = false;
+        }
+        // Return to the controller
+        return($data);
+    }    
     
 }
