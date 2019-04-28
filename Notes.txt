@@ -1,22 +1,13 @@
--display-errors=OFF in php.ini
-
-
-
-
-
-
-
--on inputs htmlspecialchars( $input, ENT_QUOTES );
-check datatypes of all input
-
-
-
-
+Bugs:
 static objects not being served
-Clean up homepage
-LargeMap
+
+Features:
+Regen Health every 30 minutes
 Kill count
-Kill count is currency to rename the title
+Kill count is currency to rename the tile
 vegitation into DB
 Hide?
 Killing a player lets you rename the tile
+
+Aesthetics:
+Clean up homepage
