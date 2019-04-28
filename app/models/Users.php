@@ -7,24 +7,12 @@ class Users_Model {
     public function __construct() {
         $this->db = new Database;
     }
-
-    public function CreateUserAccount($data) {
-        $this->db->query("
-            INSERT INTO Player ( 
-                Player_Location,
-                Username, 
-                Email, 
-                Player_Password
-            ) VALUES ( 
-                ( SELECT TOP 1 ID FROM GameBoard WHERE Vegitation != 0 ORDER BY NEWID() ),
-                :username, 
-                :email, 
-                :password
-            )"
-        );
-        $this->db->bind('username', $data['username']);
-        $this->db->bind('email', $data['email']);
-        $this->db->bind('password', $data['password']);
+    
+    public function InsertUserAccount($username, $email, $password) {
+        $this->db->query("EXEC InsertUserAccount @Username = :username, @Email = :email, @Password = :password");
+        $this->db->bind('username', $username);
+        $this->db->bind('email', $email);
+        $this->db->bind('password', $password);
         return $this->db->execute();
     }
 

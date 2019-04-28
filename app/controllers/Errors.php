@@ -39,7 +39,8 @@ class Errors extends Controller {
         if ($data['HAS_ERRORS'] == false) {
             $Var_Input = [];
             $Var_Input['report'] = POSTDATA['error'];            
-            $this->SQL = $this->SQL->CreateErrorReport($Var_Input);
+            //$this->SQL = $this->SQL->CreateErrorReport($Var_Input);
+            $this->SQL->CreateErrorReport(Session::get('PlayerGUID'),$Var_Input['report']);
             Inform::push_info('Error Report has been sent, Thank you!');
             redirect('');
         } else {

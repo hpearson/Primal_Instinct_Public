@@ -9,20 +9,23 @@ class Game extends Controller {
     
     public function index(){
         if (!Session::get('SignedIn')){redirect(''); die;}
+        $PlayerInfo = $this->SQL->GetPlayerData(Session::get('PlayerGUID'));
+        
         // check if player is alive
-        if ($this->SQL->GetStatus()->HP == 0){
+        if ($PlayerInfo->HP == 0){
             Inform::push_error('You are dead! (you must wait until you get AP again)');
         }
         // Get Player Gameboard location
-        $location = $this->SQL->GetPlayerLocation();
+        $location = $this->SQL->GetPlayerLocation(Session::get('PlayerGUID'));
+
         // Look up Gameboard data
         $MapData = $this->SQL->GetMap($location->ID);
         // Attach player data
-        $MapData['PlayerStatus'] = $this->SQL->GetStatus();
+        $MapData['PlayerStatus'] = $PlayerInfo;
         // Players at this location
-        $NearPlayers = $this->SQL->GetNeighbors($location->ID);
+        $NearPlayers = $this->SQL->GetLocalPlayers($location->ID,Session::get('PlayerGUID'),true);
         // Dead Players at this location
-        $DeadPlayers = $this->SQL->GetDeadNeighbors($location->ID);
+        $DeadPlayers = $this->SQL->GetLocalPlayers($location->ID,Session::get('PlayerGUID'),false);
         
         //$HTMLsafe = Secure::HTML($data);
 	//$this->view('game/index', $data);
@@ -64,26 +67,25 @@ class Game extends Controller {
         $data = $this->movement_check($input);
         if ($data['HAS_ERRORS'] == false) {
             // Move the player to the new location
-            $this->SQL->MovePlayer($data['location']);
+            $this->SQL->MovePlayer($data['location'], Session::get('PlayerGUID'));
             // Trample the grass in new title
-            $this->SQL->TrampleGrass($data['location']);
+            $this->SQL->UpdateVegitation($data['location'],-1);
             // Reduce player AP for this action
-            $this->SQL->ReduceAP();
+            $this->SQL->UpdateAP(Session::get('PlayerGUID'),-1);
             redirect('game/');
         } else {
-            Inform::push_warning('Failed to moved.');
+            Inform::push_warning('Failed to move.');
             redirect('game/');
         }
     }
     
     private function movement_check($data) {
         // Look up players actions left
-        if ($this->SQL->GetAP()->AP == 0){
+        if ($this->SQL->GetPlayerData(Session::get('PlayerGUID'))->AP == 0){
             $data['location_err'] = true;
         }
-        
         // Get Player Gameboard location
-        $location = $this->SQL->GetPlayerLocation();
+        $location = $this->SQL->GetPlayerLocation(Session::get('PlayerGUID'));
         // Look up Gameboard data
         $MapData = $this->SQL->GetMap($location->ID);
         // Check if desired destination is in GetMap (stop teleportation)

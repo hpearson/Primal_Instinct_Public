@@ -40,9 +40,7 @@ class Users extends Controller {
         if ($data['HAS_ERRORS'] == false) {
             // Encrypt the user password
             $input['password'] = password_hash($input['password'], PASSWORD_BCRYPT, [12]);
-            
-            $Var_Input = $input;
-            $this->SQL = $this->SQL->CreateUserAccount($Var_Input);
+            $this->SQL->InsertUserAccount($input['username'],$input['email'],$input['password']);
             Inform::push_info('Your account has been created.');
             redirect('users/login');
         } else {

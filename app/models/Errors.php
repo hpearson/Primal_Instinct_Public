@@ -8,18 +8,13 @@ class Errors_Model {
         $this->db = new Database;
     }
 
-    public function CreateErrorReport($data) {
-        // Allow NULL Players to file a report
-        $player = Session::get('PlayerGUID');
-        if (is_array($player)){
-            $player = null;
+    public function CreateErrorReport($reporter, $reporttext){
+        if (is_array($reporter)){
+            $reporter = null;
         }
-        $this->db->query(
-                  "INSERT INTO UserReports "
-                . "(ReportText, Reporter) VALUES (:report, :user) "
-                );
-        $this->db->bind('report', $data['report']);
-        $this->db->bind('user', $player);
+        $this->db->query("EXEC InsertErrorReport @Reporter = :reporter, @ReportText = :reporttext");
+        $this->db->bind('reporter', $reporter);
+        $this->db->bind('reporttext', $reporttext);
         return $this->db->execute();
     }
 
