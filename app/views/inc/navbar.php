@@ -17,17 +17,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo URLROOT; ?>index/about">About</a>
                 </li>
-                <?php if (DEBUG): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Errors
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <?php if (DEBUG): ?>
                             <a class="dropdown-item" href="<?php echo URLROOT; ?>Errors">Display Error</a>
                             <a class="dropdown-item" href="<?php echo URLROOT; ?>Errors/Test">Test Error</a>
+                            <?php endif ?>  
                             <a class="dropdown-item" href="<?php echo URLROOT; ?>Errors/Report">Report Error</a>
                         </div>
-                    </li>    
+                    </li>
+                <?php if (DEBUG): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Debug
