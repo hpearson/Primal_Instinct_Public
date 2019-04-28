@@ -10,10 +10,9 @@ class Game extends Controller {
     public function index(){
         if (!Session::get('SignedIn')){redirect(''); die;}
         // check if player is alive
-        
-        
-        
-        
+        if ($this->SQL->GetStatus()->HP == 0){
+            Inform::push_error('You are dead! (you must wait until you get AP again)');
+        }
         // Get Player Gameboard location
         $location = $this->SQL->GetPlayerLocation();
         // Look up Gameboard data
