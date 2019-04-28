@@ -75,4 +75,11 @@ class Game_Model {
         return $this->db->execute();
     }
     
+    public function InsertTileLog($location, $desc){
+        $this->db->query("EXEC InsertTileLog @EventLocation = :location, @EventDesc = :text");   
+        $this->db->bind('location', $location);
+        $this->db->bind('text', $desc);
+        return $this->db->execute();
+    }
+    
 }

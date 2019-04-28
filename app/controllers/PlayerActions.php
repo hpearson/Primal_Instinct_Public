@@ -18,6 +18,8 @@ class PlayerActions extends Controller {
             $location = $this->SQL->GetPlayerLocation(Session::get('PlayerGUID'));
             // Trample the grass in current title
             $this->SQL->UpdateVegitation($location->ID,-1);
+            // Log this action
+            $this->SQL->InsertTileLog($location->ID,'Parts of the wilderness have been removed.');            
             // Reduce player AP for this action
             $this->SQL->UpdateAP(Session::get('PlayerGUID'),-1);
             redirect('game/');
