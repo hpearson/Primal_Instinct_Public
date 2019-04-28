@@ -27,7 +27,7 @@
     </tr>
     <tr> 
         <th colspan = "3" style="text-align: left;">
-            &nbsp;Health:
+            &nbsp;Health: 💊
             <span class="badge badge-pill badge-danger">
                  <?php echo $data['PlayerStatus']->HP; ?>
             </span>
@@ -35,7 +35,7 @@
     </tr>
     <tr> 
         <th colspan = "3" style="text-align: left;">
-            &nbsp;Action Points:
+            &nbsp;Action Points: 💪
             <span class="badge badge-pill badge-primary">
                 <?php echo $data['PlayerStatus']->AP; ?>
             </span>
@@ -43,7 +43,7 @@
     </tr>
     <tr> 
         <th colspan = "3" style="text-align: left;">
-            &nbsp;Kills:
+            &nbsp;Kills: 🏆
             <span class="badge badge-pill badge-warning">
                 <?php echo $data['PlayerStatus']->Kills; ?>
             </span>
@@ -58,11 +58,11 @@
         } else {
             
             $Name = 'Thick Jungle';
-            if ($data->Vegitation < 80){$Name = 'Dense Jungle';}
-            if ($data->Vegitation < 60){$Name = 'Jungle';}
-            if ($data->Vegitation < 40){$Name = 'Forrest';}
-            if ($data->Vegitation < 20){$Name = 'Clearing';}
-            if ($data->Vegitation < 10){$Name = 'Open Clearing';}
+            if ($data->Vegitation < 80){$Name = 'Dense Jungle 🌳';}
+            if ($data->Vegitation < 60){$Name = 'Jungle 🌲';}
+            if ($data->Vegitation < 40){$Name = 'Forrest 🌴';}
+            if ($data->Vegitation < 20){$Name = 'Clearing 🏕️';}
+            if ($data->Vegitation < 10){$Name = 'Open Clearing 🌱';}
             if ($data->LocationName != ''){
                 $Name = Secure::HTML($data->LocationName);
             }
@@ -75,7 +75,7 @@
                 echo '<div class="row">';
                 echo '<div class="col">';
                 if ($data->Players > 0){
-                    echo '<span class="badge badge-pill badge-danger">'.$data->Players.' Enemy</span>';
+                    echo '<span class="badge badge-pill badge-danger">'.$data->Players.' Enemy</span>🚶';
                 }
                 
                 if ($data->LocationName != '') {$class = ''; } else { $class = 'btn-success';}
@@ -84,7 +84,7 @@
                 echo '</form>';
             } else {
                 if ($data->Players-1 > 0){
-                    echo '<span class="badge badge-pill badge-danger">'.($data->Players - 1).' Enemy</span>';
+                    echo '<span class="badge badge-pill badge-danger">'.($data->Players - 1).' Enemy</span>🚶';
                 }
             }
             echo '</td>';            

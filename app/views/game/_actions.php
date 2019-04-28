@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm">      
-                    <input type="submit" value="Attack" class="btn btn-block btn-primary">
+                    <input type="submit" value="Attack ⚔️" class="btn btn-block btn-primary">
                 </div>
                 <div class="col-sm">
                     <select class="browser-default custom-select" name="target"> 
@@ -26,7 +26,7 @@
 <hr>
 <form action="<?php echo URLROOT; ?>PlayerActions/cut" method="post" autocomplete="off">
     <input type="hidden" name="_token" value="<?php echo Session::get('_token'); ?>">
-    <input type="submit" value="Cut Vegitation" class="btn btn-block btn-secondary">
+    <input type="submit" value="Cut 🔪 Vegetation 🌴" class="btn btn-block btn-secondary">
 </form>
 <hr>
 <form action="<?php echo URLROOT; ?>PlayerActions/graffiti" method="post" autocomplete="off">
@@ -34,7 +34,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <input type="submit" value="Spray Graffiti" class="btn btn-block btn-primary">
+                <input type="submit" value="Graffiti 🎨" class="btn btn-block btn-primary">
             </div>
             <div class="col-sm">
                 <input type="text" name="graffiti" class="form-control">
@@ -49,13 +49,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <input type="submit" value="Rename Location" class="btn btn-block btn-secondary">
+                    <input type="submit" value="Rename Location 🎟️" class="btn btn-block btn-secondary">
                 </div>
                 <div class="col-sm">
                     <input type="text" name="rename" class="form-control">
                 </div>
             </div>
-            <div class="small">*Spends a kill</div>
+            <div class="small">*Spends a kill 🏆</div>
         </div>
     </form>
 <?php endif; ?>

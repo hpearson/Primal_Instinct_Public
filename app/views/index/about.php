@@ -1,7 +1,9 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <?php require APPROOT . '/views/inc/inform.php'; ?>
 <div class="page">
-    <img src="http://www.ludumdare.com/compo/wp-content/uploads/2009/08/LD2009-HighresNoShadow.png" width="300" height="41" >
+    <a href="https://ldjam.com/">
+        <img src="http://www.ludumdare.com/compo/wp-content/uploads/2009/08/LD2009-HighresNoShadow.png" width="300" height="41" >
+    </a>
     <p>
         Primal Instinct is a game made in 48 hours created for Ludum Dare 44 on 04/26/2019.<br>
         It takes inspiration from browsers games from around 2008 (Games like Urban Dead and Scroll Wars).<br><br>

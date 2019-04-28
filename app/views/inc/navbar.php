@@ -7,24 +7,24 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>">Home</a>
+                    <a class="nav-link" href="<?php echo URLROOT; ?>">Home 🏠</a>
                 </li>
                 <?php if (Session::get('SignedIn')): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>game/">Game</a>
+                        <a class="nav-link" href="<?php echo URLROOT; ?>game/">Game 🎲</a>
                     </li>                
                 <?php endif ?>
                     
                     
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>map">Map</a>
+                    <a class="nav-link" href="<?php echo URLROOT; ?>map">Map 🗺️</a>
                 </li>                    
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>index/about">About</a>
+                    <a class="nav-link" href="<?php echo URLROOT; ?>index/about">About ℹ️</a>
                 </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Errors
+                            Errors ❗
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <?php if (DEBUG): ?>
@@ -53,13 +53,13 @@
                         <a class="nav-link" href="<?php echo URLROOT; ?>users/login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>users/register">Register</a>
+                        <a class="nav-link" href="<?php echo URLROOT; ?>users/register">Register 📝</a>
                     </li>          
                 </ul>
             <?php else: ?> 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>users/logout">Log Out</a>
+                        <a class="nav-link" href="<?php echo URLROOT; ?>users/logout">Log Out 😔</a>
                     </li>        
                 </ul>           
             <?php endif ?>  

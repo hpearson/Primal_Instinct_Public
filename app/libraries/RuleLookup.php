@@ -68,7 +68,7 @@ class RuleLookup {
     static function Rename($input){
         $ValidateAgainst = v::allOf(
                 v::NotEmpty(),
-                v::Length(5, 255)
+                v::Length(1, 255)
         );
         $VWithName = $ValidateAgainst->setName(' ');
         return RuleLookup::RunTest($VWithName, $input);        

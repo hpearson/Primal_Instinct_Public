@@ -26,12 +26,8 @@ class Game extends Controller {
         $NearPlayers = $this->SQL->GetLocalPlayers($location->ID,Session::get('PlayerGUID'),true);
         // Dead Players at this location
         $DeadPlayers = $this->SQL->GetLocalPlayers($location->ID,Session::get('PlayerGUID'),false);
-        
-        //$HTMLsafe = Secure::HTML($data);
-	//$this->view('game/index', $data);
-        
-        //TODO
-	$data = [
+
+        $data = [
             'location' => $location->ID,
             'nearplayers' => $NearPlayers,
             'player' => $PlayerInfo

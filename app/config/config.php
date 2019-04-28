@@ -27,7 +27,7 @@ define('APPROOT', dirname(dirname(__FILE__)).'\\');
 define('URLROOT','http://10.0.0.119/');
 
 // Site Name
-define('SITENAME','Primal Instinct DEV');
+define('SITENAME','🦖 Primal Instinct 🦖 DEV');
 
 //Site Version
 define('VERSION','0.0.1');
