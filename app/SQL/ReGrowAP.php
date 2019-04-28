@@ -13,6 +13,8 @@ $options = array(
 
 // Create PDO instance
 $dbh = new PDO($dsn, DB_USER, DB_PASS, $options);
-$stmt = $dbh->query("UPDATE Player SET AP = AP + 1 WHERE AP < 100");
-
+$stmt = $dbh->query("
+        UPDATE Player SET AP = AP + 1 WHERE AP < 100 AND RespawnTime IS NULL
+        UPDATE Player SET RespawnTime = NULL, HP = 20, AP = 5 WHERE GETDATE() > RespawnTime
+        ");
 ?>

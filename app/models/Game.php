@@ -30,23 +30,23 @@ class Game_Model {
             DECLARE @X int 
             DECLARE @Y int
             SELECT @X = Grid_X, @Y = Grid_Y FROM GameBoard WHERE ID = :location
-            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X - 1 AND @Y = Grid_Y - 1
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID AND HP != 0) AS 'Players' FROM GameBoard WHERE @X = Grid_X - 1 AND @Y = Grid_Y - 1
             UNION
-            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X AND @Y = Grid_Y - 1
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID AND HP != 0) AS 'Players' FROM GameBoard WHERE @X = Grid_X AND @Y = Grid_Y - 1
             UNION
-            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X + 1 AND @Y = Grid_Y - 1
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID AND HP != 0) AS 'Players' FROM GameBoard WHERE @X = Grid_X + 1 AND @Y = Grid_Y - 1
             UNION
-            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X - 1 AND @Y = Grid_Y
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID AND HP != 0) AS 'Players' FROM GameBoard WHERE @X = Grid_X - 1 AND @Y = Grid_Y
             UNION
-            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X AND @Y = Grid_Y
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID AND HP != 0) AS 'Players' FROM GameBoard WHERE @X = Grid_X AND @Y = Grid_Y
             UNION
-            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X + 1 AND @Y = Grid_Y
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID AND HP != 0) AS 'Players' FROM GameBoard WHERE @X = Grid_X + 1 AND @Y = Grid_Y
             UNION
-            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X - 1 AND @Y = Grid_Y + 1
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID AND HP != 0) AS 'Players' FROM GameBoard WHERE @X = Grid_X - 1 AND @Y = Grid_Y + 1
             UNION
-            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X AND @Y = Grid_Y + 1
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID AND HP != 0) AS 'Players' FROM GameBoard WHERE @X = Grid_X AND @Y = Grid_Y + 1
             UNION
-            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID) AS 'Players' FROM GameBoard WHERE @X = Grid_X + 1 AND @Y = Grid_Y + 1
+            SELECT *, (SELECT COUNT(*) FROM Player WHERE Player_Location = GameBoard.ID AND HP != 0) AS 'Players' FROM GameBoard WHERE @X = Grid_X + 1 AND @Y = Grid_Y + 1
             ORDER BY Grid_Y, Grid_X
         ");
         
@@ -76,11 +76,18 @@ class Game_Model {
     }
     
     public function GetNeighbors($data) {
-        $this->db->query("SELECT * FROM Player WHERE Player_Location = :location AND ID != :player ");
+        $this->db->query("SELECT * FROM Player WHERE Player_Location = :location AND ID != :player AND HP != 0");
         $this->db->bind('location', $data);
         $this->db->bind('player', Session::get('PlayerGUID'));
         return $this->db->resultSet();
     }
+    
+    public function GetDeadNeighbors($data) {
+        $this->db->query("SELECT * FROM Player WHERE Player_Location = :location AND ID != :player AND HP = 0");
+        $this->db->bind('location', $data);
+        $this->db->bind('player', Session::get('PlayerGUID'));
+        return $this->db->resultSet();
+    }    
     
     public function GetAP() {
         $this->db->query("SELECT AP FROM Player WHERE ID = :player ");
@@ -96,13 +103,23 @@ class Game_Model {
     
     public function ReduceHP($target) {
         $this->db->query("
-                UPDATE Player SET HP = HP - 1 WHERE ID = :player 
+                DECLARE @player uniqueidentifier
+                SET @player = :player
+
+                UPDATE Player SET HP = HP - 1 WHERE ID = @player 
                 INSERT INTO TileLog (EventLocation, EventDesc) VALUES (
-                (SELECT Player_Location FROM Player WHERE ID = :player_1)
+                (SELECT Player_Location FROM Player WHERE ID = @player)
                 ,'A player was attacked!')
+                
+                IF (SELECT HP FROM Player WHERE ID = @player) = 0   
+                BEGIN
+                    UPDATE Player SET RespawnTime = DATEADD(HOUR,2,GETDATE()), AP = 0 WHERE ID = @player
+                    INSERT INTO TileLog (EventLocation, EventDesc) VALUES (
+                    (SELECT Player_Location FROM Player WHERE ID = @player)
+                    ,'A player has been killed')
+                END
                 ");
         $this->db->bind('player', $target);
-        $this->db->bind('player_1', $target);
         return $this->db->execute();
     }
     

@@ -9,19 +9,22 @@ class Game extends Controller {
     
     public function index(){
         if (!Session::get('SignedIn')){redirect(''); die;}
-
+        // check if player is alive
+        
+        
+        
+        
         // Get Player Gameboard location
         $location = $this->SQL->GetPlayerLocation();
         // Look up Gameboard data
         $MapData = $this->SQL->GetMap($location->ID);
         // Attach player data
         $MapData['PlayerStatus'] = $this->SQL->GetStatus();
-        
-        
-
         // Players at this location
         $NearPlayers = $this->SQL->GetNeighbors($location->ID);
-
+        // Dead Players at this location
+        $DeadPlayers = $this->SQL->GetDeadNeighbors($location->ID);
+        
         //$HTMLsafe = Secure::HTML($data);
 	//$this->view('game/index', $data);
         
@@ -41,6 +44,7 @@ class Game extends Controller {
             echo '</div>';
             echo '<div class="col-sm">';
                 $this->view('game/_nearplayers', $NearPlayers);
+                $this->view('game/_deadplayers', $DeadPlayers);
                 $this->view('game/_actions', $data);
                 $this->view('game/_tilelog', $this->SQL->GetHistory($location->ID));
             echo '</div>';
