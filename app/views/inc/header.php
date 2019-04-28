@@ -15,10 +15,20 @@
 
 <style>
 body {
-    background: #232;
+    background: #253725;
 }
 .page{
-    background: #565;
+    width: 100%;
+    background: #6f856f;
     padding: 16px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #586a58;
+    display:inline-block;
 }
+    .btn-primary:hover {
+    background-color: #8064A2;
+    border-color: #8064A2;
+}
+
  </style>

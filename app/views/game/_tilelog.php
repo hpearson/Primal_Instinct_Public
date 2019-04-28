@@ -1,5 +1,8 @@
+
+
+
+
 <?php if (count($data) > 0): ?>
-    <br>
     <?php
     foreach ($data as $value) {
         echo get_timeago(strtotime($value->EventTime));
@@ -9,3 +12,4 @@
     }
     ?>
 <?php endif; ?>
+

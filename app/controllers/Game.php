@@ -51,6 +51,9 @@ class Game extends Controller {
                 $this->view('game/_nearplayers', $NearPlayers);
                 $this->view('game/_deadplayers', $DeadPlayers);
                 $this->view('game/_actions', $data);
+            echo '</div>';
+            echo '<br><br>';
+            echo '<div class="page">';
                 $this->view('game/_tilelog', $this->SQL->GetHistory($location->ID));
             echo '</div>';
         echo '</div>';

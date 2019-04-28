@@ -2,11 +2,11 @@
 <?php if (count($data) > 0): ?>
     <?php
     foreach ($data as $value) {
-        echo '<u>' . Secure::HTML($value->Username) . '</u>&nbsp;';
+        echo '<b>' . Secure::HTML($value->Username) . '</b>, ';
     }
 ?> is also here.
 
 <?php else: ?>
     There is nobody around.
 <?php endif; ?>
-<br>
+<hr>

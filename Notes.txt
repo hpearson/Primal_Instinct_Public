@@ -12,13 +12,12 @@ check datatypes of all input
 
 
 
-
-
-
-
-Players can log into their char
-Game board being made now
-
-
-About page has been completed
-Users must be logged in to see game board
+static objects not being served
+Clean up homepage
+clean up about page
+LargeMap
+Kill count
+Kill count is currency to rename the title
+vegitation into DB
+Hide?
+Killing a player lets you rename the tile
