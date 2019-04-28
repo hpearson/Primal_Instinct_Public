@@ -1,5 +1,5 @@
 
 <?php if (count($data) > 0): ?>
-    <div class="row">There is a dead body here</div>
+    There is a dead body here
     <br>
 <?php endif; ?>

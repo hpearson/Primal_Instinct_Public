@@ -1,5 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <?php require APPROOT . '/views/inc/inform.php'; ?>
+<div class="page">
     <h1><?php echo $data['title']; ?></h1>
     <p>This was a game created for Ludum Dare 44</p>
     <br>
@@ -9,4 +10,5 @@
     <p><b>PHP Version:</b> 7.3.4, x64, Thread Safety disabled</p>
     <p><b>ODBC Driver Version:</b> 17.3.1.1, x64</p>
     <p><b>MSSQL Version:</b> 2017</p>
+</div> 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

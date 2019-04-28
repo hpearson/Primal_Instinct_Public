@@ -42,9 +42,12 @@ class Game extends Controller {
         echo '<div class="container">';
         echo '<div class="row">';
             echo '<div class="col-sm">';
+            echo '<div class="page">';
                 $this->view('game/_gameboard', $MapData);
             echo '</div>';
+            echo '</div>';
             echo '<div class="col-sm">';
+            echo '<div class="page">';
                 $this->view('game/_nearplayers', $NearPlayers);
                 $this->view('game/_deadplayers', $DeadPlayers);
                 $this->view('game/_actions', $data);
