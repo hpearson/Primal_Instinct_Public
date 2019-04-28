@@ -57,7 +57,7 @@
             echo '<td style="background: #666;"></td>';
         } else {
             
-            $Name = 'Thick Jungle';
+            $Name = '🌴 Thick Jungle 🌴';
             if ($data->Vegitation < 80){$Name = 'Dense Jungle 🌳';}
             if ($data->Vegitation < 60){$Name = 'Jungle 🌲';}
             if ($data->Vegitation < 40){$Name = 'Forrest 🌴';}
